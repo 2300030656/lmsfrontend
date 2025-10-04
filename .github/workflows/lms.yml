@@ -30,3 +30,20 @@ jobs:
 
       - name: Build the project
         run: npm run build
+
+         # Configure Git identity
+      - name: Configure Git
+        run: |
+          git config --global user.name "2300030656"
+          git config --global user.email "2300030656@kluniversity.in"
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "2300030656"
+          git config --global user.email "2300030656@kluniversity.in"
+          npm install -g gh-pages
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          npm run deploy
